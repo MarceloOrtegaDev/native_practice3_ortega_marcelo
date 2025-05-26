@@ -6,6 +6,7 @@ export const loginUser = async (username, password) => {
         
         const response = await fetch(Url, {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
