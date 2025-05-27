@@ -1,11 +1,10 @@
 import { Text, View, TouchableOpacity } from 'react-native'
-import React, { Component } from 'react'
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 
 export default function ButtonLogout (){
-    const navigation = useNavigation();
+    const router = useRouter();
     return (
-        <TouchableOpacity onPress={()=> navigation.navigate("Login")} style={{alignItems:"center",backgroundColor: '#780000', width:100, padding: 5, borderRadius: 5,}}>
+        <TouchableOpacity onPress={()=> router.push("/")} style={{alignItems:"center",backgroundColor: '#780000', width:100, padding: 5, borderRadius: 5,}}>
             <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold'}}>Logout</Text>
         </TouchableOpacity>
     )

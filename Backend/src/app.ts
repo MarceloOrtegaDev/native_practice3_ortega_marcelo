@@ -10,7 +10,7 @@ const app = express()
 
 app.use(express.json())
 app.use(cors({
-    origin:["http://10.0.2.2:3000","http://localhost:8081"],
+    origin:true,
     credentials: true
 }))
 app.use(morgan("dev"))

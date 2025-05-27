@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome } from 'react-native-vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import ButtonLogout from './ButtonLogout';
+import { useRouter } from 'expo-router';
 
 export const FooterBar = () => {
-  const navigate = useNavigation();
-  const [activeButton, setActiveButton] = useState(null);
+    const router = useRouter()
+    const [activeButton, setActiveButton] = useState(null);
 
   const renderButton = (name, icon, color) => {
     const isActive = activeButton === name;
@@ -15,7 +15,7 @@ export const FooterBar = () => {
       <TouchableOpacity
         onPressIn={() => setActiveButton(name)}
         onPressOut={() => setActiveButton(null)}
-        onPress={() => navigate.navigate(name)}
+        onPress={() => router.push(`/${name.toLowerCase()}`)}
         style={[
           styles.button,
           isActive && styles.buttonPressed
@@ -36,9 +36,9 @@ export const FooterBar = () => {
 
   return (
     <View style={styles.footer}>
-      {renderButton("Home", "home", "#F0EAD2")}
-      {renderButton("Graphics", "pie-chart", "#E85D04")}
-      {renderButton("Sciense", "database", "#ADC178")}
+      {renderButton("home", "home", "#F0EAD2")}
+      {renderButton("graphics", "pie-chart", "#E85D04")}
+      {renderButton("sciense", "database", "#ADC178")}
       <ButtonLogout/>
     </View>
   );

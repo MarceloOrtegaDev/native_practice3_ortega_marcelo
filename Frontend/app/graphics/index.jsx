@@ -1,29 +1,32 @@
-import { Text, View, Image, StyleSheet, ScrollView } from 'react-native'
-import { graficos } from '../utils/graficos'
+import { Text, View, Image, StyleSheet, FlatList } from 'react-native'
+import { graficos } from '../../utils/graficos'
 
-export const Graphics = () => {
+export default function Graphics() {
+  const renderItem = ({ item }) => (
+    <View style={style.bloque}>
+      <Text style={style.tituloBloque}>{item.title}</Text>
+      <View style={style.bloque2}>
+        <Text style={style.descripcion}>{item.description}</Text>
+        <Image source={{ uri: item.image }} style={{ height: 90, width: 150, borderRadius: 10 }} />
+      </View>
+    </View>
+  );
+
   return (
-    <ScrollView contentContainerStyle={{flexGrow:1, paddingBottom: 56}}>
-        <View style={style.contenedor}>
-            <Text style={style.titulo}>Gráficos a tener en cuenta al trabajar con visualización de datos</Text>
-            {graficos.map((gr, id)=>{
-                return(
-                    <View key={id} style={style.bloque}>
-                        <Text style={style.tituloBloque}>
-                            {gr.title}
-                        </Text>
-                        <View style={style.bloque2}>
-                            <Text style={style.descripcion}>
-                                {gr.description}
-                            </Text>
-                            <Image source={{uri: gr.image}} style={{height: 90, width:150, borderRadius: 10}}/>
-                        </View>
-                </View>
-            )})}
-        </View>
-    </ScrollView>
-  )
-}
+    <FlatList
+      ListHeaderComponent={
+        <Text style={style.titulo}>
+          Gráficos a tener en cuenta al trabajar con visualización de datos
+        </Text>
+      }
+      data={graficos}
+      renderItem={renderItem}
+      keyExtractor={(item, index) => index.toString()}
+      contentContainerStyle={{ flexGrow: 1, padding: 8, paddingBottom: 56, backgroundColor: "#2B2D42" }}
+    />
+  );
+};
+
 
 const style = StyleSheet.create({
     contenedor:{
@@ -74,5 +77,3 @@ const style = StyleSheet.create({
         maxWidth: "60%"
     }
 })
-
-

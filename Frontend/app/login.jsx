@@ -1,22 +1,29 @@
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import { useForm, Controller} from 'react-hook-form';
 import { useState } from 'react';
-import { loginUser } from '../services/user.service';
+import { loginUser } from '../services/user.Service';
 
 export default function Login() {
+  const router = useRouter();
   const [user, setUser] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
   const { control, handleSubmit } = useForm();
-  const navigation = useNavigation();
+
   const onSubmit = async (data) => {
     const { username, password } = data;
-    const result = await loginUser(username, password);
+    setErrorMessage('');
 
-    if(result){
-      setUser(result);
-      navigation.navigate("Home");
-    } else {
-      setUser("error broer");
+    try {
+      const result = await loginUser(username, password);
+      if (result) {
+        setUser(result);
+        router.push('/home');
+      } else {
+        setErrorMessage('Credenciales incorrectas');
+      }
+    } catch (error) {
+      setErrorMessage('Esa contraseña no es correcta');
     }
   };
 
@@ -64,11 +71,13 @@ export default function Login() {
       <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)}>
         <Text style={styles.buttonText}>Iniciar sesión</Text>
       </TouchableOpacity>
-      {user.username && <Text style={styles.success}>Bienvenido {user.username}</Text>}
 
+      {user.username && <Text style={styles.success}>Bienvenido {user.username}</Text>}
+      {errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>}
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

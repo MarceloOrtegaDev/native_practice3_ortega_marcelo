@@ -1,5 +1,7 @@
-
-const Url = "http://10.0.2.2:3000/api/login";
+import { Platform } from "react-native";
+const Url = Platform.OS === "web" 
+  ? "http://localhost:3000/api/login" 
+  : "http://10.0.2.2:3000/api/login";
 
 export const loginUser = async (username, password) => {
     try {
