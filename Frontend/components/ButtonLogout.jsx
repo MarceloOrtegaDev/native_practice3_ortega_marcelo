@@ -1,4 +1,4 @@
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import { useRouter } from 'expo-router';
 
 export default function ButtonLogout (){

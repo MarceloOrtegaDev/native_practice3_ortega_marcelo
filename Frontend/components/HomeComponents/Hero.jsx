@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, Platform, Image } from 'react-native'
-import banner from '../../assets/banner.png';
+import banner from '../../assets/images/banner.png'
 
 export const Hero = () => {
   return (

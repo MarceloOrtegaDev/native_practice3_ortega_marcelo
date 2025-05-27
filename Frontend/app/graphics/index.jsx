@@ -1,5 +1,5 @@
 import { Text, View, Image, StyleSheet, FlatList } from 'react-native'
-import { graficos } from '../../utils/graficos'
+import { graficos } from '../../utils/graficos';
 
 export default function Graphics() {
   const renderItem = ({ item }) => (
@@ -21,7 +21,7 @@ export default function Graphics() {
       }
       data={graficos}
       renderItem={renderItem}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={(item) => item.id.toString()}
       contentContainerStyle={{ flexGrow: 1, padding: 8, paddingBottom: 56, backgroundColor: "#2B2D42" }}
     />
   );

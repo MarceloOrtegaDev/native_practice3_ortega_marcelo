@@ -1,26 +1,36 @@
+import { Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { dataInfo } from '../../utils/dataSciense';
-import { Text, View, FlatList, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
+export default function Sciense() {
+  const router = useRouter();
 
-export default function Sciense () {
   const renderSection = ({ item }) => (
-    <View style={styles.section}>
+    <TouchableOpacity 
+      onPress={() => router.push(`/sciense/${item.id}`)}
+      style={styles.section}
+      >
       <Text style={styles.title}>{item.title}</Text>
       {item.description && (
         <Text style={styles.description}>{item.description}</Text>
       )}
       {item.items && item.items.map((subItem, index) => (
-        <Text key={index} style={styles.item}>• {subItem}</Text>
-      ))}
-    </View>
+        <Text key={index} style={styles.item}>
+    • {typeof subItem === 'string' ? subItem : subItem.name}
+  </Text>
+))}
+    </TouchableOpacity>
   );
 
   return (
+    <>
+    <Text className="text-xl text-center font-bold">Selecciona sobre lo que quieres informarte</Text>
     <FlatList
       data={dataInfo}
-      keyExtractor={(_, index) => index.toString()}
+      keyExtractor={(item) => item.id.toString()}
       renderItem={renderSection}
       contentContainerStyle={styles.container}
-    />
+      />
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { Stack, usePathname } from 'expo-router';
 import { FooterBar } from '../components/FooterBar';
+import "../global.css";
 
 export default function Layout() {
   const pathname = usePathname();
@@ -16,3 +17,4 @@ export default function Layout() {
     </>
   );
 }
+

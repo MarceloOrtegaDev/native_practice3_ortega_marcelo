@@ -1,10 +1,8 @@
-import React from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
-import machine from '../../assets/machine.png';
-import datos from '../../assets/cienciaDeDatos.png';
-import graficos from '../../assets/graficos.png';
+import machine from '../../assets/images/machine.png';
+import datos from '../../assets/images/cienciaDeDatos.png';
+import graficos from '../../assets/images/graficos.png';
 
-//LA SINTAXIS ES UNA CHOTAAAAAA
 export const Info = () => {
   return (
     <View style={style.contenedorPrincipal}>

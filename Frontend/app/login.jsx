@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import { useRouter } from 'expo-router';
 import { useForm, Controller} from 'react-hook-form';
 import { useState } from 'react';
-import { loginUser } from '../services/user.Service';
+import { loginUser } from '../services/user.service';
 
 export default function Login() {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function Login() {
         setErrorMessage('Credenciales incorrectas');
       }
     } catch (error) {
-      setErrorMessage('Esa contraseña no es correcta');
+      setErrorMessage(`Esa contraseña no es correcta ${error.message}`);
     }
   };
 

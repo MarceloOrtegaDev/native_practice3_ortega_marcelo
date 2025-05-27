@@ -1,7 +1,6 @@
 import { View, ScrollView } from 'react-native'
 import { Hero } from '../../components/HomeComponents/Hero'
 import { Info } from '../../components/HomeComponents/Info'
-import { FooterBar } from '../../components/FooterBar'
 
 export default function Home () {
   return (
@@ -12,7 +11,6 @@ export default function Home () {
           <Info />
         </View>
       </ScrollView>
-      <FooterBar />
     </View>
   )
 }
