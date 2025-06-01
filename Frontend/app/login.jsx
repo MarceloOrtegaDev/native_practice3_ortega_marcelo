@@ -1,8 +1,9 @@
 import { Text, View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useForm, Controller} from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useState } from 'react';
 import { loginUser } from '../services/user.service';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Login() {
   const router = useRouter();
@@ -18,7 +19,7 @@ export default function Login() {
       const result = await loginUser(username, password);
       if (result) {
         setUser(result);
-        router.push('/home');
+        router.replace('/home');
       } else {
         setErrorMessage('Credenciales incorrectas');
       }
@@ -28,7 +29,15 @@ export default function Login() {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={[
+        '#0f0f0f', '#0d0d0d', '#0a0a0a', '#070707', '#040404', '#040404', '#050404', '#050404', '#080708', '#0b0a0b',
+        '#0d0d0e', '#0f1011'
+      ]}
+      style={styles.container}
+      start={{ x: 0.5, y: 0 }}
+      end={{ x: 0.5, y: 1 }}
+    >
       <Text style={styles.title}>Iniciar sesión</Text>
 
       <Text style={styles.Label}>Username</Text>
@@ -41,6 +50,7 @@ export default function Login() {
             <TextInput
               style={styles.input}
               placeholder="fulanito"
+              placeholderTextColor="#ccc"
               value={value}
               onChangeText={onChange}
             />
@@ -60,6 +70,7 @@ export default function Login() {
               style={styles.input}
               secureTextEntry={true}
               placeholder="********"
+              placeholderTextColor="#ccc"
               value={value}
               onChangeText={onChange}
             />
@@ -74,14 +85,12 @@ export default function Login() {
 
       {user.username && <Text style={styles.success}>Bienvenido {user.username}</Text>}
       {errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>}
-    </View>
+    </LinearGradient>
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#1B263B',
     flex: 1,
     alignItems: 'center',
     gap: 10,
@@ -102,7 +111,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: "bold",
     marginBottom: 10,
-    width:250
+    width: 250
   },
   button: {
     backgroundColor: 'red',
@@ -112,13 +121,13 @@ const styles = StyleSheet.create({
     width: 250,
   },
   buttonText: {
-    fontSize:15,
+    fontSize: 15,
     color: 'white',
     fontWeight: 'bold'
   },
   error: {
     color: 'red',
-    fontWeight:"bold",
+    fontWeight: "bold",
     marginBottom: 10
   },
   success: {
@@ -126,10 +135,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "green"
   },
-  Label:{
+  Label: {
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
-    right:90
+    right: 90
   }
 });
